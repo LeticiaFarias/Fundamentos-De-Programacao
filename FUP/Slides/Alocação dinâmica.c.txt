@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int **mat(int lin, int col) {
+    int **M, i;
+    M=(int **)malloc(lin*sizeof(int *));    //o cast n?o ? necess?rio
+    for(i=0;i<lin;i++) {
+        M[i]=(int *)malloc(col*sizeof(int));    //o cast n?o ? necess?rio
+    }
+    return M;
+}
+
+void soma1(int **M, int linhas, int colunas) {
+    int i,j;
+    for(i=0;i<linhas;i++) {
+        for(j=0;j<colunas;j++) {
+            M[i][j]=M[i][j]+1;
+        }
+    }
+}
+
+int main()
+{
+    int **M,m,n,i,j;
+    
+    scanf("%d %d",&m,&n);
+    M=mat(m,n);
+    
+    for(i=0;i<m;i++) {
+        for(j=0;j<n;j++) {
+            scanf("%d",&M[i][j]);
+        }
+    }
+    
+    soma1(M,m,n);
+    
+    system("@cls||clear");
+    
+    for(i=0;i<m;i++) {
+        for(j=0;j<n;j++) {
+            printf("%d ",M[i][j]);
+        }
+        printf("\n");
+    }
+    
+    system("PAUSE");
+    
+    return 0;
+}

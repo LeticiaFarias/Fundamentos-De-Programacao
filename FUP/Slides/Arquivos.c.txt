@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char str[256];
+    int n, i, num;
+    FILE *arq1, *arq2;
+    
+    
+    
+    //lendo um arquivo e imprimindo suas linhas
+    arq1 = fopen("arquivo.txt","r"); //abrindo o arquivo em modo de leitura
+    if(arq1==NULL) printf("nao deu pra abrir\n"); //se n?o conseguiu abrir
+    else { //se conseguiu abrir
+        while(fgets(str,sizeof(str),arq1)!=NULL) { //l? cada linha at? o fim do arquivo
+            printf("%s",str); //imprime a linha lida
+        }
+        fclose(arq1); //fecha o arquivo
+    }
+    
+    
+    
+    //adicionando informa??es a um arquivo
+    arq1 = fopen("arquivo.txt","a"); //abrindo o arquivo para adicionar informa??es
+    if(arq1==NULL) printf("nao deu pra abrir\n"); //se n?o conseguiu abrir
+    else { //se conseguiu abrir
+        scanf("%d",&n); //quantidade de valores que vamos inserir
+        for(i=0;i<n;i++) { //loop sobre a quantidade de valores
+            scanf("%d",&num); //l? o valor
+            fprintf(arq1,"%d\n",num); //escreve o valor no arquivo
+        }
+        fclose(arq1); //fecha o arquivo
+    }
+    
+    
+    
+    //criando uma c?pia do arquivo
+    arq1 = fopen("arquivo.txt","r"); //abrindo o arquivo em modo de leitura
+    if(arq1==NULL) printf("nao deu pra abrir\n"); //se n?o conseguiu abrir
+    else { //se conseguiu abrir
+        arq2 = fopen("copia.txt","w"); //cria o arquivo copia.txt (apagando o existente)
+        while(fgets(str,sizeof(str),arq1)!=NULL) { //l? cada linha at? o fim do arquivo
+            fprintf(arq2,"%s",str); //escreve a linha no arquivo copia
+        }
+        fclose(arq2); //fecha o arquivo
+        fclose(arq1); //fecha o arquivo
+    }
+    
+    system("PAUSE");
+    return 0;
+}
